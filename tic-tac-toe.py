@@ -87,29 +87,59 @@ def draw_move(board):
     if best_move:
         board[best_move[0]][best_move[1]] = 'X'
 
+def choose_starting_player():
+    while True:
+        choice = input("Do you want to play first or second? (enter 'first' or 'second'): ").strip().lower()
+        if choice in ['first', 'second']:
+            return choice
+        else:
+            print("Invalid choice. Please enter 'first' or 'second'.")
+
 def tic_tac_toe():
     board = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+    player_turn = choose_starting_player()
     
     while True:
-        display_board(board)
-        enter_move(board)
-        if victory_for(board, 'O'):
+        if player_turn == 'first':
             display_board(board)
-            print("Congratulations! You won!")
-            break
-        if not make_list_of_free_fields(board):
+            enter_move(board)
+            if victory_for(board, 'O'):
+                display_board(board)
+                print("Congratulations! You won!")
+                break
+            if not make_list_of_free_fields(board):
+                display_board(board)
+                print("It's a tie!")
+                break
+            draw_move(board)
+            if victory_for(board, 'X'):
+                display_board(board)
+                print("The computer won. Better luck next time!")
+                break
+            if not make_list_of_free_fields(board):
+                display_board(board)
+                print("It's a tie!")
+                break
+        else:
+            draw_move(board)
             display_board(board)
-            print("It's a tie!")
-            break
-        draw_move(board)
-        if victory_for(board, 'X'):
-            display_board(board)
-            print("The computer won. Better luck next time!")
-            break
-        if not make_list_of_free_fields(board):
-            display_board(board)
-            print("It's a tie!")
-            break
+            if victory_for(board, 'X'):
+                display_board(board)
+                print("The computer won. Better luck next time!")
+                break
+            if not make_list_of_free_fields(board):
+                display_board(board)
+                print("It's a tie!")
+                break
+            enter_move(board)
+            if victory_for(board, 'O'):
+                display_board(board)
+                print("Congratulations! You won!")
+                break
+            if not make_list_of_free_fields(board):
+                display_board(board)
+                print("It's a tie!")
+                break
 
 if __name__ == "__main__":
     tic_tac_toe()
