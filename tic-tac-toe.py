@@ -1,7 +1,12 @@
-def display_board(board):
-    # The function accepts one parameter containing the board's current status
-    # and prints it out to the console.
+import random
 
+def display_board(board):
+    for row in board:
+        print("+-------" * 3 + "+")
+        for cell in row:
+            print("|   " + str(cell) + "   ", end="")
+        print("|")
+    print("+-------" * 3 + "+")
 
 def enter_move(board):
     # The function accepts the board's current status, asks the user about their move, 
